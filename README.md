@@ -189,3 +189,64 @@ Ponownie i tutaj liczba alertów jest całkiem spora 1020,
 ![image](https://github.com/user-attachments/assets/f1a1e76c-8fa0-4e79-964c-1f6d7afe7789)
 
 8.Struktura reguły Snort
+
+Task 1: Użyj „ task9.pcap”.
+Napisz regułę filtrującą  IP ID „35369” i uruchom ją na podanym pliku pcap.  Jaka jest nazwa żądania wykrytego pakietu? snort -c local.rules -A full -l . -r task9.pcap
+
+Posługując się powyższym opisem w tym zadaniu utworzyłem lokalną regułę, która wygląda nastepująco.
+```
+# $Id: local.rules,v 1.11 2004/07/23 20:15:44 bmc Exp $
+# ----------------
+# LOCAL RULES
+# ----------------
+# This file intentionally does not come with signatures.  Put your local
+# additions here.
+alert icmp any any -> any any (msg: "ICMP Packet Found";id:35369; sid:1000001; rev:1;)
+```
+Tak naprawdę skopiowałem wszystko z ```/etc/snort/rules/local.rules``` i dodałem ;id:35369; uruchomiłem polecenie ```snort -c local.rules -A full -l . -r task9.pcap``` i wyświetliłem plik, który nam się pokazał czyli alert a w nim już znajdowała się nasza odpowiedź.
+
+![image](https://github.com/user-attachments/assets/2716a359-8d46-450b-b142-ea1a320f4dab)
+
+Czyli: TIMESTAMP REQUEST
+
+Task 2: Utwórz regułę filtrowania  pakietów z flagą Syn  i uruchom ją w odniesieniu do podanego pliku pcap.  Jaka jest liczba wykrytych pakietów?
+
+```
+# $Id: local.rules,v 1.11 2004/07/23 20:15:44 bmc Exp $
+# ----------------
+# LOCAL RULES
+# ----------------
+# This file intentionally does not come with signatures.  Put your local
+# additions here.
+alert tcp any any <> any any (msg: "FLAG TEST"; flags:S;  sid: 100001; rev:1;)
+```
+Ponownie tutaj zmajstrowałem regulę. I wynik jest następujący:
+
+![image](https://github.com/user-attachments/assets/74122c1f-1f15-4580-b4e6-7fdda29e5979)
+
+Task 3:Wyczyść poprzednie pliki dziennika i alarmów i dezaktywuj/zakomentuj starą regułę.
+Napisz regułę filtrowania  pakietów z flagami Push-Ack  i uruchom ją na podanym pliku pcap.  Jaka jest liczba wykrytych pakietów?
+
+Skrypt wygląda następujaco:
+```
+# $Id: local.rules,v 1.11 2004/07/23 20:15:44 bmc Exp $
+# ----------------
+# LOCAL RULES
+# ----------------
+# This file intentionally does not come with signatures.  Put your local
+# additions here.
+alert tcp any any <> any any (msg: "FLAG TEST"; flags:PA;  sid: 100001; rev:1;)
+```
+
+Odpowiedźią na te pytanie jest 216.
+
+
+Task 4:Wyczyść poprzednie pliki dziennika i alarmów i dezaktywuj/zakomentuj starą regułę.
+Utwórz regułę filtrowania  pakietów z tym samym adresem źródłowym i docelowym IP  i uruchom ją na podanym pliku pcap.  Jaka jest liczba pakietów, które pokazują ten sam adres źródłowy i docelowy?
+
+Skrypt wygląda następujaco:
+```alert ip any any <> any any (msg: "SAME-IP TEST";  sameip; sid: 100001; rev:1;)```
+Odpowiedźią jest: 7
+
+Task 5:Przykład przypadku -  Analityk zmodyfikował istniejącą regułę pomyślnie.  Którą opcję reguły analityk musi zmienić po wdrożeniu?
+Odpowiedźią na to pytanie jest: rev
