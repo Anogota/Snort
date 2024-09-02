@@ -120,10 +120,68 @@ Czyli to będzie: 0x38AFFFF3
 Task 5:Przeczytaj plik „ snort.log.1640048004” za pomocą Snort; jaka jest liczba pakietów „TCP port 80” ?
 Użyłem w tym przypadku tego polecania ```snort -r snort.log.1640048004 'tcp and port 80' | wc -l``` aby wyświetlił nam ile jest tych pakietów, jest to 41.
 
+
 6.Tryb działania 3: IDS/IPS
 
+Task 1:
+Zbadaj ruch przy użyciu domyślnego pliku konfiguracyjnego.
 
+sudo snort -c /etc/snort/snort.conf -A full -l .
 
+Uruchom skrypt generatora ruchu i wybierz „TASK-7 Exercise” . Poczekaj, aż ruch się zatrzyma, a następnie zatrzymaj instancję Snort. Teraz przeanalizuj podsumowanie wyników i odpowiedz na pytanie.
+sudo ./traffic-generator.sh
 
+Jaka jest liczba wykrytych metod HTTP GET?
+Wystarczy tylko tak naprawde przekopiować polecenia i przeanalizować plik, odpowiedźią na pytanie jest: 2
 
+7.Tryb działania 4: Badanie PCAP
 
+Task 1: Zbadaj plik mx-1.pcap przy użyciu domyślnego pliku konfiguracyjnego.
+sudo snort -c /etc/snort/snort.conf -A full -l . -r mx-1.pcap
+Jaka jest liczba wygenerowanych alertów?
+
+Urchomy więc to polecenia, możemy bardzo wyraznie zauważyć jaka jest liczba alertów, zobacz screan poniżej.
+![image](https://github.com/user-attachments/assets/2346d47d-fd2d-4b5b-80bf-0e018035c41b)
+
+Jest to 170 alertów.
+
+Task 2:Kontynuuj czytanie wyników.  Ile segmentów TCP jest w kolejce?
+Ponownie mozemy to bardzo wyrażnie zobaczyć w naszych wynika. jest to 18.
+
+![image](https://github.com/user-attachments/assets/e0f60032-5efe-4b6f-a348-c9d5efb08b82)
+
+Task 3:Kontynuuj czytanie wyników. Ile „nagłówków odpowiedzi HTTP” zostało wyodrębnionych?
+Odpowiedźia jest 3, patrz poniżej:
+
+![image](https://github.com/user-attachments/assets/67bfd805-75af-41e5-9077-a0d75f3c149b)
+
+Task 4:Zbadaj   plik mx-1.pcap przy użyciu drugiego pliku konfiguracyjnego.
+sudo snort -c /etc/snort/snortv2.conf -A full -l . -r mx-1.pcap
+Jaka jest liczba wygenerowanych alertów?
+
+Więc zabierajmy się do roboty, przekopiuj ```sudo snort -c /etc/snort/snortv2.conf -A full -l . -r mx-1.pcap``` to do terminala.
+W tym przypadku jest to 68 alertów:
+![image](https://github.com/user-attachments/assets/2ae30fae-413b-4fb1-b0cb-dabd14dac11a)
+
+Task 5:Sprawdź plik mx-2.pcap przy użyciu domyślnego pliku konfiguracyjnego.
+sudo snort -c /etc/snort/snort.conf -A full -l . -r mx-2.pcap
+Jaka jest liczba wygenerowanych alertów?
+
+Ponownie przekopiuj polecenie do terminala i zobaczymy co się zmieniło ```sudo snort -c /etc/snort/snort.conf -A full -l . -r mx-2.pcap```
+Jest to aż 340 alertów:
+![image](https://github.com/user-attachments/assets/589ef910-302f-4d06-8c20-11892c8dee22)
+
+Task 6:Kontynuuj czytanie wyników.  Jaka jest liczba wykrytych pakietów TCP?
+Ponownie zagłębiając się w zrzuconą analizę, możemy ujrzeć odpowiedź na nasze pytanie, czyli: 82.
+
+![image](https://github.com/user-attachments/assets/b0e21546-8ffd-47dc-a5b5-b7b23ff147a9)
+
+Task 7:Zbadaj  pliki mx-2.pcap i mx-3.pcap  przy użyciu domyślnego pliku konfiguracyjnego.
+sudo snort -c /etc/snort/snort.conf -A full -l . --pcap-list="mx-2.pcap mx-3.pcap"
+Jaka jest liczba wygenerowanych alertów?
+
+Ponownie jak w poprzednich, skopiuj polecenie do termianala ```sudo snort -c /etc/snort/snort.conf -A full -l . --pcap-list="mx-2.pcap mx-3.pcap"``` i zobaczymy ile jest alertów
+Ponownie i tutaj liczba alertów jest całkiem spora 1020,
+![image](https://github.com/user-attachments/assets/f1a1e76c-8fa0-4e79-964c-1f6d7afe7789)
+
+8.Struktura reguły Snort
