@@ -141,6 +141,7 @@ sudo snort -c /etc/snort/snort.conf -A full -l . -r mx-1.pcap
 Jaka jest liczba wygenerowanych alertów?
 
 Urchomy więc to polecenia, możemy bardzo wyraznie zauważyć jaka jest liczba alertów, zobacz screan poniżej.
+
 ![image](https://github.com/user-attachments/assets/2346d47d-fd2d-4b5b-80bf-0e018035c41b)
 
 Jest to 170 alertów.
@@ -161,6 +162,7 @@ Jaka jest liczba wygenerowanych alertów?
 
 Więc zabierajmy się do roboty, przekopiuj ```sudo snort -c /etc/snort/snortv2.conf -A full -l . -r mx-1.pcap``` to do terminala.
 W tym przypadku jest to 68 alertów:
+
 ![image](https://github.com/user-attachments/assets/2ae30fae-413b-4fb1-b0cb-dabd14dac11a)
 
 Task 5:Sprawdź plik mx-2.pcap przy użyciu domyślnego pliku konfiguracyjnego.
@@ -169,6 +171,7 @@ Jaka jest liczba wygenerowanych alertów?
 
 Ponownie przekopiuj polecenie do terminala i zobaczymy co się zmieniło ```sudo snort -c /etc/snort/snort.conf -A full -l . -r mx-2.pcap```
 Jest to aż 340 alertów:
+
 ![image](https://github.com/user-attachments/assets/589ef910-302f-4d06-8c20-11892c8dee22)
 
 Task 6:Kontynuuj czytanie wyników.  Jaka jest liczba wykrytych pakietów TCP?
@@ -182,6 +185,7 @@ Jaka jest liczba wygenerowanych alertów?
 
 Ponownie jak w poprzednich, skopiuj polecenie do termianala ```sudo snort -c /etc/snort/snort.conf -A full -l . --pcap-list="mx-2.pcap mx-3.pcap"``` i zobaczymy ile jest alertów
 Ponownie i tutaj liczba alertów jest całkiem spora 1020,
+
 ![image](https://github.com/user-attachments/assets/f1a1e76c-8fa0-4e79-964c-1f6d7afe7789)
 
 8.Struktura reguły Snort
