@@ -250,3 +250,5 @@ Odpowiedźią jest: 7
 
 Task 5:Przykład przypadku -  Analityk zmodyfikował istniejącą regułę pomyślnie.  Którą opcję reguły analityk musi zmienić po wdrożeniu?
 Odpowiedźią na to pytanie jest: rev
+
+<h3>Dzięki wielkie z części praktycznej to tak naprawdę wszystko, można sobie doczytac pozostała część pokoju w własnym zakresie</h3>
